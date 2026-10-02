@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Beibo Sales Playbook</title>
+<style>
+:root{
+  --bg:#f6f5f2; --panel:#ffffff; --ink:#1d1d1b; --ink-2:#5b5a55; --ink-3:#8b8a84;
+  --line:#e4e2dc; --accent:#9a5b2e; --accent-soft:#f3e7dc; --hover:#faf9f6;
+  --g:#1f7a4a; --g-bg:#e3f2e9; --y:#8a6400; --y-bg:#fbf0d2; --r:#b3261e; --r-bg:#fbe4e1;
+  --say-bg:#f2f7f4; --tip-bg:#fff6e0;
+  --mark:#ffe58a; --shadow:0 1px 2px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161614; --panel:#1f1f1c; --ink:#ecebe6; --ink-2:#b4b2aa; --ink-3:#85837c;
+    --line:#33322e; --accent:#d99a68; --accent-soft:#3a2b1f; --hover:#262622;
+    --g:#6fd39b; --g-bg:#1b3326; --y:#e8c36a; --y-bg:#3a3018; --r:#f08a80; --r-bg:#3e1f1c;
+    --say-bg:#1c2a22; --tip-bg:#33291a;
+    --mark:#6b5a12; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161614; --panel:#1f1f1c; --ink:#ecebe6; --ink-2:#b4b2aa; --ink-3:#85837c;
+  --line:#33322e; --accent:#d99a68; --accent-soft:#3a2b1f; --hover:#262622;
+  --g:#6fd39b; --g-bg:#1b3326; --y:#e8c36a; --y-bg:#3a3018; --r:#f08a80; --r-bg:#3e1f1c;
+  --say-bg:#1c2a22; --tip-bg:#33291a;
+  --mark:#6b5a12; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:160px}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+button,input,select{font:inherit;color:inherit}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.top{max-width:1180px;margin:0 auto;padding:14px 20px 12px;display:flex;flex-direction:column;gap:10px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand h1{margin:0;font-size:17px;font-weight:650;letter-spacing:-.01em}
+.brand h1 span{color:var(--accent)}
+.brand small{color:var(--ink-3);font-size:12.5px}
+.search{position:relative}
+.search input{width:100%;height:46px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);
+  padding:0 44px 0 42px;font-size:16px;outline:none;box-shadow:var(--shadow)}
+.search input:focus{border-color:var(--accent)}
+.search input::-webkit-search-cancel-button{display:none}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+.search .kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--ink-3);
+  border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+.search .clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;
+  font-size:22px;line-height:1;color:var(--ink-3);display:none;padding:6px 10px}
+.search.has-q .clear{display:block}.search.has-q .kbd{display:none}
+.controls{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sep{width:1px;height:20px;background:var(--line);margin:0 4px;flex:none}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.dot.g{background:var(--g)}.dot.y{background:#d4a017}.dot.r{background:var(--r)}.dot.n{background:transparent;border:1.5px solid var(--line)}
+.chip .dot{margin-right:5px;vertical-align:0}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:28px;padding:20px}
+nav{position:sticky;top:160px;align-self:start;max-height:calc(100vh - 180px);overflow:auto;padding-bottom:20px}
+nav .sec{margin-bottom:4px}
+nav .sec>button{width:100%;text-align:left;border:0;background:none;padding:7px 10px;border-radius:8px;cursor:pointer;
+  font-weight:650;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+nav .sec>button:hover{background:var(--panel)}
+nav .sec.active>button{background:var(--accent-soft);color:var(--accent)}
+nav .sec>button .zh{font-weight:400;color:var(--ink-3);font-size:12.5px;margin-left:6px}
+nav .n{color:var(--ink-3);font-size:12px;font-weight:400}
+nav ul{list-style:none;margin:2px 0 6px 16px;padding:0 0 0 12px;border-left:1px solid var(--line)}
+nav li a{display:flex;justify-content:space-between;gap:8px;padding:4px 8px;border-radius:6px;color:var(--ink-2);text-decoration:none;font-size:13.5px}
+nav li a:hover{background:var(--panel);color:var(--ink)}
+nav .sec:not(.active) ul{display:none}
+.mnav{display:none}
+main{min-width:0}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+h2.sectitle{font-size:24px;margin:0;letter-spacing:-.015em}
+h2.sectitle .zh{color:var(--ink-3);font-weight:400;font-size:18px;margin-left:8px}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;font-size:13px;padding:4px 0;white-space:nowrap}
+h3.topic{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin:26px 0 8px;font-weight:650}
+h3.topic:first-of-type{margin-top:4px}
+h3.topic .zh{text-transform:none;letter-spacing:0;margin-left:6px;font-weight:400}
+
+/* ---------- rows ---------- */
+.list{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.item+.item{border-top:1px solid var(--line)}
+.row{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:0;background:none;cursor:pointer;padding:11px 14px}
+.row:hover{background:var(--hover)}
+.row .dot{margin-top:1px}
+.row .t{flex:1;min-width:0}
+.row .q{font-weight:600}
+.row .qz{color:var(--ink-2);font-size:13.5px}
+.row .path{font-size:11.5px;color:var(--ink-3)}
+.row .chev{color:var(--ink-3);transition:transform .15s;flex:none}
+.item.open .row .chev{transform:rotate(90deg)}
+.item.open .row{background:var(--hover)}
+.detail{display:none;padding:2px 14px 14px 35px}
+.item.open .detail{display:grid;gap:10px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase;margin-bottom:4px;display:flex;gap:8px;align-items:center}
+.say{background:var(--say-bg);border-radius:10px;padding:10px 12px}
+.say .line{display:flex;gap:10px;align-items:flex-start}
+.say .line+.line{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.say .txt{flex:1;font-size:15.5px;white-space:pre-wrap}
+.say.holding .txt{font-style:italic}
+.tip{background:var(--tip-bg);border-radius:10px;padding:9px 12px;font-size:14px}
+.item.r .tip{background:var(--r-bg)}
+.info{font-size:14.5px}
+.info p{margin:0 0 6px}.info p:last-child{margin:0}
+.info ul{margin:2px 0 6px;padding-left:20px}.info li{margin:3px 0}
+.info .zhblock{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--ink-2)}
+pre.copy{margin:0;white-space:pre-wrap;font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--hover);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.btn{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:3px 10px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.btn.done{color:var(--g);border-color:var(--g)}
+.badge{font-size:11.5px;font-weight:650;border-radius:999px;padding:1px 8px;text-transform:none;letter-spacing:0}
+.badge.g{background:var(--g-bg);color:var(--g)}.badge.y{background:var(--y-bg);color:var(--y)}.badge.r{background:var(--r-bg);color:var(--r)}
+mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
+body.lang-en .zh-only, body.lang-zh .en-only{display:none}
+body.lang-en .row .qz{display:none}
+body.lang-zh .row .q{display:none}
+body.lang-zh .row .qz{color:var(--ink);font-weight:600;font-size:15px}
+
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:22px;text-align:center}
+.empty p{margin:6px 0}
+.empty .holdline{font-size:16px;font-weight:600;margin:12px 0}
+.wa{display:inline-block;margin-top:10px;background:#1f8f4e;color:#fff;text-decoration:none;border-radius:10px;padding:9px 16px;font-weight:600}
+.count{color:var(--ink-3);font-size:13px;margin:0 0 10px}
+.fatal{max-width:640px;margin:60px auto;padding:24px;background:var(--r-bg);border-radius:12px}
+.fatal h2{margin:0 0 8px;color:var(--r)}
+footer{color:var(--ink-3);font-size:12.5px;text-align:center;padding:30px 20px 40px}
+
+/* ---------- mobile ---------- */
+@media (max-width:860px){
+  html{scroll-padding-top:185px}
+  .top{padding:10px 16px;gap:8px}
+  .brand small{display:none}
+  .brand h1{font-size:15px}
+  .search input{height:42px}
+  .search .kbd{display:none}
+  .controls,.mnav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .controls::-webkit-scrollbar,.mnav::-webkit-scrollbar{display:none}
+  .wrap{grid-template-columns:1fr;padding:14px 16px;gap:0}
+  nav{display:none}
+  .mnav{display:flex;gap:6px}
+  h2.sectitle{font-size:21px}
+  .detail{padding-left:14px}
+  .msel{display:block;width:100%;margin:0 0 12px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+}
+@media (min-width:861px){.msel{display:none}}
+</style>
+<script>
+  // Catch errors in content.js so a typo shows a clear message instead of a blank page
+  window.__contentError = null;
+  window.addEventListener("error", function(e){
+    if(e.filename && /content\.js/.test(e.filename)) window.__contentError = e.message + " (line " + e.lineno + ")";
+  });
+</script>
+</head>
+<body class="lang-both">
+<header>
+  <div class="top">
+    <div class="brand">
+      <h1>Beibo <span>Sales Playbook</span> · 贝博销售手册</h1>
+      <small id="updated"></small>
+    </div>
+    <div class="search" id="searchbox">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Type what the client asked · 输入客户的问题" aria-label="Search">
+      <span class="kbd">/</span>
+      <button class="clear" id="clear" aria-label="Clear search">×</button>
+    </div>
+    <div class="controls">
+      <button class="chip" data-light="all" aria-pressed="true">All</button>
+      <button class="chip" data-light="g" aria-pressed="false"><span class="dot g"></span>Say it</button>
+      <button class="chip" data-light="y" aria-pressed="false"><span class="dot y"></span>Say exactly this</button>
+      <button class="chip" data-light="r" aria-pressed="false"><span class="dot r"></span>Ask Zee</button>
+      <span class="sep"></span>
+      <button class="chip" data-lang="both" aria-pressed="true">EN + 中文</button>
+      <button class="chip" data-lang="en" aria-pressed="false">EN</button>
+      <button class="chip" data-lang="zh" aria-pressed="false">中文</button>
+    </div>
+    <div class="mnav" id="mnav"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav" aria-label="Sections"></nav>
+  <main id="main"></main>
+</div>
+<footer id="footer">
+  <span class="dot g"></span> say it · <span class="dot y"></span> say exactly this, no more · <span class="dot r"></span> don't answer, use the holding line and ask Zee.<br>
+  Not in the playbook = red. Only the green <strong>Say</strong> boxes are for the client. Tips are for you.
+</footer>
+
+<script src="content.js"></script>
+<script>
+(function(){
+  const P = window.PLAYBOOK;
+  const $ = s => document.querySelector(s);
+
+  // ---------- broken content.js ----------
+  if(!P || !Array.isArray(P.sections)){
+    document.querySelector(".wrap").innerHTML =
+      '<div class="fatal"><h2>The playbook content has an error</h2>' +
+      '<p>The last edit to <strong>content.js</strong> has a typo, usually a missing comma, quote or bracket.</p>' +
+      (window.__contentError ? '<p><code>' + String(window.__contentError).replace(/</g,"&lt;") + '</code></p>' : '') +
+      '<p>Open content.js on GitHub → <em>History</em> → look at the last change, or tell Zee.</p>' +
+      '<p>手册内容文件有错误（通常是少了逗号、引号或括号）。请在 GitHub 查看 content.js 最近一次修改，或告诉 Zee。</p></div>';
+    document.querySelector("header .controls").style.display = "none";
+    return;
+  }
+
+  const LIGHT = {g:"Say it", y:"Say exactly this", r:"Ask Zee"};
+  const HOLD = P.holding || {say:"Let me confirm with our engineering team and come back to you today.", say_zh:"我跟工程团队确认后今天回复您。"};
+  const state = {section: P.sections[0].id, light: "all", lang: "both", q: "", expandAll: false};
+  const open = new Set();
+
+  // ---------- text helpers ----------
+  function norm(s){ return (s||"").toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,""); }
+  function esc(s){ return String(s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+  function inline(s){
+    return esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/(^|[\s(])\*(?!\s)(.+?)\*(?=[\s).,]|$)/g,"$1<em>$2</em>");
+  }
+  function fmt(text){
+    if(!text) return "";
+    return text.split(/\n\s*\n/).map(b => {
+      let html = "", list = [];
+      const flush = () => { if(list.length){ html += "<ul>" + list.map(l => "<li>"+inline(l)+"</li>").join("") + "</ul>"; list = []; } };
+      b.split("\n").forEach(l => {
+        if(/^\s*- /.test(l)) list.push(l.replace(/^\s*- /,""));
+        else { flush(); if(l.trim()) html += "<p>"+inline(l)+"</p>"; }
+      });
+      flush(); return html;
+    }).join("");
+  }
+  const plain = s => (s||"").replace(/\*\*(.+?)\*\*/g,"$1");
+
+  // ---------- search index ----------
+  const STOP = new Set("a an the is are do does did you your we our it its can could would will of to in on for and or with what which how who when where i me my they there this that be have has please about any".split(" "));
+  const CJK = /[㐀-鿿]/;
+  function units(q){
+    const out = [];
+    norm(q).split(/[\s,.;:!?，。！？、“”"'()（）]+/).filter(Boolean).forEach(tok => {
+      // split mixed tokens into Latin and CJK runs
+      tok.split(/([㐀-鿿]+)/).filter(Boolean).forEach(run => {
+        if(CJK.test(run)){
+          if(run.length <= 2) out.push(run);
+          else for(let i = 0; i < run.length - 1; i++) out.push(run.slice(i, i+2));
+        } else if(run.length > 1 && !STOP.has(run)) out.push(run);
+      });
+    });
+    return [...new Set(out)];
+  }
+  const all = [];
+  P.sections.forEach(s => s.topics.forEach(t => t.items.forEach((it, i) => {
+    it._id = s.id + "/" + t.id + "/" + i;
+    all.push({s, t, it,
+      title: norm([it.q, it.q_zh].join(" ")),
+      head: norm([it.q, it.q_zh, it.keys].join(" ")),
+      body: norm([it.say, it.say_zh, it.tip, it.info, it.info_zh, it.copy, t.title, t.zh].join(" "))});
+  })));
+  function search(q){
+    const us = units(q);
+    if(!us.length) return {hits: [], us};
+    let scored = all.filter(e => lightOk(e.it)).map(e => {
+      let matched = 0, score = 0;
+      us.forEach(u => {
+        const h = e.head.includes(u), b = e.body.includes(u);
+        if(h || b) matched++;
+        score += (e.title.includes(u) ? 2 : 0) + (h ? 3 : 0) + (b ? 1 : 0);
+      });
+      if(e.head.includes(norm(q).trim())) score += 5;
+      return {e, matched, score};
+    }).filter(x => x.matched > 0);
+    if(!scored.length) return {hits: [], us};
+    const best = Math.max(...scored.map(x => x.matched));
+    const need = Math.max(1, Math.ceil(best * 0.6));
+    scored = scored.filter(x => x.matched >= need).sort((a,b) => b.matched - a.matched || b.score - a.score);
+    return {hits: scored.map(x => x.e), us};
+  }
+
+  // ---------- rendering ----------
+  function lightOk(it){ return state.light === "all" || it.light === state.light; }
+
+  function copyBtn(text, label){
+    const b = document.createElement("button");
+    b.className = "btn"; b.textContent = label;
+    b.addEventListener("click", ev => {
+      ev.stopPropagation();
+      const done = () => { const o = b.textContent; b.textContent = "Copied ✓"; b.classList.add("done"); setTimeout(() => { b.textContent = o; b.classList.remove("done"); }, 1400); };
+      if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done);
+      else { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); done(); }
+    });
+    return b;
+  }
+
+  function sayBlock(en, zh, holding){
+    const box = document.createElement("div");
+    box.className = "say" + (holding ? " holding" : "");
+    box.innerHTML = '<div class="lbl">' + (holding ? "Say (holding line) · 对客户说" : "Say to the client · 对客户说") + '</div>';
+    [[en, "en", "Copy"], [zh, "zh", "复制"]].forEach(([txt, lang, lbl]) => {
+      if(!txt) return;
+      const line = document.createElement("div");
+      line.className = "line " + (lang === "en" ? (zh ? "en-only" : "") : "zh-only");
+      line.innerHTML = '<div class="txt">' + esc(txt) + '</div>';
+      line.appendChild(copyBtn(plain(txt), lbl));
+      box.appendChild(line);
+    });
+    return box;
+  }
+
+  function itemEl(entry, withPath){
+    const {s, t, it} = entry;
+    const L = it.light || "n";
+    const el = document.createElement("div");
+    el.className = "item " + L + (open.has(it._id) || state.expandAll ? " open" : "");
+    const row = document.createElement("button");
+    row.className = "row"; row.setAttribute("aria-expanded", el.classList.contains("open"));
+    row.innerHTML = '<span class="dot ' + L + '" title="' + (LIGHT[L] || "") + '"></span><span class="t">' +
+      (withPath ? '<div class="path">' + esc(s.title) + ' › ' + esc(t.title) + '</div>' : '') +
+      '<div class="q">' + inline(it.q) + '</div>' + (it.q_zh ? '<div class="qz">' + esc(it.q_zh) + '</div>' : '') +
+      '</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>';
+    row.addEventListener("click", () => {
+      const isOpen = el.classList.toggle("open");
+      row.setAttribute("aria-expanded", isOpen);
+      isOpen ? open.add(it._id) : open.delete(it._id);
+    });
+    el.appendChild(row);
+
+    const d = document.createElement("div"); d.className = "detail";
+    if(it.light) d.insertAdjacentHTML("beforeend", '<div class="lbl"><span class="badge ' + L + '">' + LIGHT[L] + '</span></div>');
+    if(it.say || it.say_zh) d.appendChild(sayBlock(it.say, it.say_zh, false));
+    else if(it.light === "r" && !it.info) d.appendChild(sayBlock(HOLD.say, HOLD.say_zh, true));
+    if(it.tip) d.insertAdjacentHTML("beforeend", '<div class="tip"><div class="lbl">Tip for you · 给你的提示 — don\'t send</div>' + inline(it.tip) + '</div>');
+    if(it.info || it.info_zh){
+      d.insertAdjacentHTML("beforeend", '<div class="info">' +
+        (it.info ? '<div class="' + (it.info_zh ? "en-only" : "") + '">' + fmt(it.info) + '</div>' : '') +
+        (it.info_zh ? '<div class="zhblock zh-only">' + fmt(it.info_zh) + '</div>' : '') + '</div>');
+    }
+    if(it.copy){
+      const wrap = document.createElement("div");
+      wrap.innerHTML = '<pre class="copy">' + esc(it.copy) + '</pre>';
+      const bar = document.createElement("div"); bar.style.cssText = "display:flex;justify-content:flex-end;margin-top:6px";
+      bar.appendChild(copyBtn(it.copy, "Copy template")); wrap.appendChild(bar);
+      d.appendChild(wrap);
+    }
+    el.appendChild(d);
+    return el;
+  }
+
+  function highlight(root, us){
+    const terms = us.filter(u => u.length > 1 || CJK.test(u));
+    if(!terms.length) return;
+    const re = new RegExp("(" + terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).sort((a,b)=>b.length-a.length).join("|") + ")", "gi");
+    root.querySelectorAll(".q,.qz,.say .txt,.tip,.info").forEach(node => {
+      const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      const nodes = []; while(walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(n => {
+        re.lastIndex = 0; if(!re.test(n.nodeValue)) return; re.lastIndex = 0;
+        const span = document.createElement("span");
+        span.innerHTML = esc(n.nodeValue).replace(re, "<mark>$1</mark>");
+        n.replaceWith(...span.childNodes);
+      });
+    });
+  }
+
+  function renderNav(){
+    const nav = $("#nav"), mnav = $("#mnav");
+    nav.innerHTML = ""; mnav.innerHTML = "";
+    P.sections.forEach(s => {
+      const n = s.topics.reduce((a,t) => a + t.items.length, 0);
+      const active = s.id === state.section && !state.q;
+      const d = document.createElement("div");
+      d.className = "sec" + (active ? " active" : "");
+      d.innerHTML = '<button><span>' + esc(s.title) + '<span class="zh">' + esc(s.zh) + '</span></span><span class="n">' + n + '</span></button>' +
+        '<ul>' + s.topics.map(t => '<li><a href="#' + s.id + '/' + t.id + '"><span>' + esc(t.title) + '</span><span class="n">' + t.items.length + '</span></a></li>').join("") + '</ul>';
+      d.querySelector("button").addEventListener("click", () => go(s.id));
+      d.querySelectorAll("a").forEach(a => a.addEventListener("click", e => {
+        e.preventDefault(); const [sid, tid] = a.getAttribute("href").slice(1).split("/"); go(sid, tid);
+      }));
+      nav.appendChild(d);
+      const c = document.createElement("button");
+      c.className = "chip"; c.setAttribute("aria-pressed", active);
+      c.textContent = s.title + " · " + s.zh;
+      c.addEventListener("click", () => go(s.id));
+      mnav.appendChild(c);
+    });
+  }
+
+  function go(sid, tid){
+    state.section = sid; state.expandAll = false;
+    if(state.q) setQuery("");
+    history.replaceState(null, "", "#" + sid + (tid ? "/" + tid : ""));
+    render();
+    if(tid){ const el = document.getElementById("t-" + tid); if(el) el.scrollIntoView(); } else window.scrollTo(0, 0);
+  }
+
+  function renderSection(){
+    const s = P.sections.find(x => x.id === state.section) || P.sections[0];
+    const main = $("#main"); main.innerHTML = "";
+    const head = document.createElement("div"); head.className = "sechead";
+    head.innerHTML = '<h2 class="sectitle">' + esc(s.title) + '<span class="zh">' + esc(s.zh) + '</span></h2>';
+    const tog = document.createElement("button"); tog.className = "linkbtn";
+    tog.textContent = state.expandAll ? "Collapse all · 全部收起" : "Expand all · 全部展开";
+    tog.addEventListener("click", () => { state.expandAll = !state.expandAll; if(!state.expandAll) open.clear(); render(); });
+    head.appendChild(tog); main.appendChild(head);
+
+    const sel = document.createElement("select"); sel.className = "msel"; sel.setAttribute("aria-label","Jump to topic");
+    sel.innerHTML = '<option value="">Jump to topic · 跳转…</option>' + s.topics.map(t => '<option value="' + t.id + '">' + esc(t.title) + ' · ' + esc(t.zh) + '</option>').join("");
+    sel.addEventListener("change", () => { const el = document.getElementById("t-" + sel.value); if(el) el.scrollIntoView(); });
+    main.appendChild(sel);
+
+    let shown = 0;
+    s.topics.forEach(t => {
+      const items = t.items.filter(lightOk);
+      if(!items.length) return;
+      main.insertAdjacentHTML("beforeend", '<h3 class="topic" id="t-' + t.id + '">' + esc(t.title) + '<span class="zh">' + esc(t.zh) + '</span></h3>');
+      const list = document.createElement("div"); list.className = "list";
+      items.forEach(it => { list.appendChild(itemEl({s, t, it}, false)); shown++; });
+      main.appendChild(list);
+    });
+    if(!shown) main.insertAdjacentHTML("beforeend", '<p class="count">Nothing in this section matches the filter.</p>');
+  }
+
+  function renderSearch(){
+    const main = $("#main"); main.innerHTML = "";
+    const {hits, us} = search(state.q);
+    if(!hits.length){
+      const wa = "https://wa.me/" + P.whatsapp + "?text=" + encodeURIComponent("[Playbook] Client asked: " + state.q);
+      main.innerHTML = '<div class="empty"><p><strong>Not in the playbook, so treat it as red.</strong> 手册里没有 = 红灯</p>' +
+        '<p class="holdline">“' + esc(HOLD.say) + '”</p><p>“' + esc(HOLD.say_zh) + '”</p>' +
+        '<a class="wa" href="' + wa + '" target="_blank" rel="noopener">Ask Zee on WhatsApp</a></div>';
+      return;
+    }
+    main.insertAdjacentHTML("beforeend", '<p class="count">' + hits.length + ' result' + (hits.length > 1 ? "s" : "") + '</p>');
+    const list = document.createElement("div"); list.className = "list";
+    hits.forEach((e, i) => {
+      const el = itemEl(e, true);
+      if(i === 0 || hits.length <= 2){ el.classList.add("open"); el.querySelector(".row").setAttribute("aria-expanded", "true"); }
+      list.appendChild(el);
+    });
+    main.appendChild(list);
+    highlight(main, us);
+  }
+
+  function render(){ renderNav(); state.q ? renderSearch() : renderSection(); }
+
+  // ---------- events ----------
+  const qi = $("#q");
+  function setQuery(v){ qi.value = v; state.q = v.trim(); $("#searchbox").classList.toggle("has-q", !!state.q); }
+  let timer;
+  qi.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { setQuery(qi.value); render(); window.scrollTo(0, 0); }, 80);
+  });
+  $("#clear").addEventListener("click", () => { setQuery(""); render(); qi.focus(); });
+  document.addEventListener("keydown", e => {
+    if(e.key === "/" && document.activeElement !== qi){ e.preventDefault(); qi.focus(); qi.select(); }
+    if(e.key === "Escape" && document.activeElement === qi){ setQuery(""); render(); }
+  });
+  document.querySelectorAll("[data-light]").forEach(b => b.addEventListener("click", () => {
+    state.light = b.dataset.light;
+    document.querySelectorAll("[data-light]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    render();
+  }));
+  function setLang(l){
+    state.lang = l; document.body.className = "lang-" + l;
+    document.querySelectorAll("[data-lang]").forEach(x => x.setAttribute("aria-pressed", x.dataset.lang === l));
+    try{ localStorage.setItem("pb-lang", l); }catch(e){}
+  }
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  try{ const l = localStorage.getItem("pb-lang"); if(l === "en" || l === "zh" || l === "both") setLang(l); }catch(e){}
+
+  $("#updated").textContent = "Updated " + P.updated + " · owner " + P.owner;
+  const [sid, tid] = location.hash.slice(1).split("/");
+  if(sid && P.sections.some(s => s.id === sid)) state.section = sid;
+  render();
+  if(tid){ const el = document.getElementById("t-" + tid); if(el) el.scrollIntoView(); }
+})();
+</script>
+</body>
+</html>
