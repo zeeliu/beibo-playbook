@@ -22,6 +22,8 @@
    tip            what David should do. Never sent to the client.  给 David 的提示，不发给客户
    info, info_zh  reference notes (buyers, products, markets)    参考内容
    copy           a template David copies for himself     David 自用的模板（可复制）
+   img            pictures: [{ src: "img/file.jpg", cap: "caption" }]   图片（放在 public/img/）
+   links          downloads: [{ href: "files/file.pdf", label: "…" }]   下载链接（放在 public/files/）
 
    TEXT FORMAT / 文本格式
    Start a line with "- " for a bullet. **double stars** = bold.
@@ -103,6 +105,7 @@ window.PLAYBOOK = {
 
     { id: "monitoring", title: "Monitoring", zh: "粮情监测", items: [
       { q: "How does temperature monitoring work?", q_zh: "测温怎么工作？", light: "g",
+        img: [{ src: "img/monitoring-system.jpg", cap: "How monitoring connects: cables in the grain → controller → workstation, phone, remote PC" }],
         keys: "temperature cable sensor how it works 测温 电缆 传感器 温度",
         say: "Cables with digital sensors hang through the grain. They report to a controller at each store, which sends the data to your control room and to PC, tablet or phone.",
         say_zh: "带数字传感器的测温电缆垂挂在粮堆中，接到每个仓的测控分机，再把数据传到中控室和电脑、平板、手机。" },
@@ -118,11 +121,13 @@ window.PLAYBOOK = {
         say: "Each controller handles up to 512 temperature sensors and 6 humidity sensors. Each collector handles 60 temperature sensors.",
         say_zh: "每台分机最多 512 个温度传感器、6 个湿度传感器；每个采集器 60 个温度传感器。" },
       { q: "Wired or wireless?", q_zh: "有线还是无线？", light: "g",
+        img: [{ src: "img/controller.jpg", cap: "Monitoring controller (stainless steel)" }, { src: "img/solar-wireless-controller.jpg", cap: "Solar-powered wireless controller" }],
         keys: "wireless wired communication RS485 ethernet 4G LoRa network 通讯 无线 有线",
         say: "Both. Wired RS-485 or Ethernet, or wireless. We choose what suits the site.",
         say_zh: "都可以：有线 485、以太网或无线，按现场选。",
         tip: "Specific wireless technology (4G, LoRa…) or range: ask Zee. 具体无线制式和距离问 Zee。" },
       { q: "Are the cables durable? Food-safe?", q_zh: "电缆耐用吗？食品级吗？", light: "y",
+        img: [{ src: "img/temperature-cable.jpg", cap: "Temperature cable" }],
         keys: "cable durable strength food grade safe HDPE IP68 电缆 食品级 耐用",
         say: "The cables have an HDPE sheath with a food-grade test report, IP68 protection and 300 kg tensile strength. The shallow-silo version has a replaceable core, so repairs are cheap.",
         say_zh: "电缆为 HDPE 护套，有食品级检测报告，IP68，抗拉 300 kg；浅圆仓电缆可换芯，维修成本低。" },
@@ -164,6 +169,7 @@ window.PLAYBOOK = {
 
     { id: "fumigation", title: "Fumigation & CA", zh: "熏蒸与气调", items: [
       { q: "How is your fumigation different?", q_zh: "你们的熏蒸有什么不同？", light: "g",
+        img: [{ src: "img/fumigation-system.jpg", cap: "Recirculation fumigation in a silo and a flat warehouse" }],
         keys: "fumigation phosphine recirculation fumigant 熏蒸 环流",
         say: "Our recirculation fumigation moves the fumigant through the whole grain mass in a loop, so it reaches everywhere evenly. The system includes a fumigant generator, a timer controller, gas detection and a phosphine degradation unit, for both flat warehouses and silos.",
         say_zh: "环流熏蒸让药剂在粮堆中循环流动、分布均匀。系统包括发生器、定时控制、气体检测和磷化氢降解装置，平房仓和筒仓都适用。",
@@ -226,7 +232,8 @@ window.PLAYBOOK = {
         keys: "catalog catalogue brochure PDF 目录 宣传册",
         say: "Of course. Here's our 2026 product catalog.",
         say_zh: "当然，这是我们的 2026 产品目录。",
-        tip: "Attach Beibo_Product_Catalog_2026_A4_Digital_Reader.pdf. 附上 2026 A4 电子版目录。" },
+        tip: "Download the catalog below and attach it in WhatsApp or email. 下载目录后在 WhatsApp 或邮件里发送。",
+        links: [{ href: "files/Beibo_Product_Catalog_2026.pdf", label: "Download catalog (PDF, 11 MB)" }] },
       { q: "Samples, demo or a pilot?", q_zh: "有样品、演示或试点吗？", light: "r",
         keys: "sample demo trial pilot test 样品 演示 试点",
         tip: "Ask Zee. A pilot site is a big decision. 问 Zee，试点是重大决定。" }
@@ -337,6 +344,7 @@ window.PLAYBOOK = {
 
     { id: "systems", title: "Five systems", zh: "五大系统", items: [
       { q: "Grain Condition Monitoring", q_zh: "粮情监测",
+        img: [{ src: "img/monitoring-system.jpg", cap: "System overview" }, { src: "img/controller.jpg", cap: "Controller" }, { src: "img/temperature-cable.jpg", cap: "Temperature cable" }, { src: "img/solar-wireless-controller.jpg", cap: "Solar wireless controller" }],
         keys: "monitoring temperature humidity cable pest gas robot 粮情 测温",
         info: "**Solves:** problems found too late.\n**Lead line:** \"Know storage conditions at every point.\"\n- Temperature/humidity cables, controllers, collectors, wireless in-bin monitors\n- Pest traps and a sampling selector; PH₃ / O₂ / CO₂ gas detection\n- Grain-surface inspection robot",
         info_zh: "**解决：** 问题发现太晚\n- 测温电缆、测控分机、采集器、无线测温\n- 害虫诱捕、取样；磷化氢/氧气/二氧化碳检测\n- 粮面巡检机器人" },
@@ -345,6 +353,7 @@ window.PLAYBOOK = {
         info: "**Solves:** warm grain, and aeration that's manual or badly timed.\n**Lead line:** \"Automate the air path. Cool grain when the weather can't.\"\n- Aeration control: fans, motorized windows, dampers, electric rain caps, roof remote units\n- Internal air circulation (uses existing floor ducts)\n- Grain-cooling units",
         info_zh: "**解决：** 粮温高、通风靠人工\n- 智能通风：风机、电动窗、风阀、电动防雨帽\n- 内环流控温（利用现有地笼）\n- 谷物冷却机" },
       { q: "Grain Protection", q_zh: "粮食保护",
+        img: [{ src: "img/fumigation-system.jpg", cap: "Recirculation fumigation in a silo and a flat warehouse" }],
         keys: "fumigation controlled atmosphere nitrogen 熏蒸 气调 氮气",
         info: "**Solves:** uneven fumigation and chemical exposure.\n**Lead line:** \"Protect grain evenly, with or without chemicals.\"\n- Recirculation fumigation: generator, timer controller, detection, phosphine degradation unit\n- Nitrogen controlled atmosphere: control cabinet + mobile nitrogen generator",
         info_zh: "**解决：** 熏蒸不均、接触药剂\n- 环流熏蒸：发生器、定时控制、检测、磷化氢降解\n- 充氮气调：控制柜 + 移动式制氮机组" },
@@ -482,6 +491,19 @@ window.PLAYBOOK = {
         keys: "handover introduce Zee 转交 介绍",
         say: "Hi [Name], I'd like to introduce Zee Liu, who leads our overseas business. Zee will prepare the proposal for your [project] and can answer the technical details.",
         tip: "Replace the [brackets] before sending. 发送前替换 [方括号]。" }
+    ]},
+
+    { id: "downloads", title: "Downloads", zh: "下载", items: [
+      { q: "Product catalog 2026 (English)", q_zh: "2026 英文产品目录",
+        keys: "catalog catalogue brochure PDF download 目录 宣传册 下载",
+        info: "The file to send clients. Attach it in WhatsApp or email.",
+        info_zh: "发给客户的目录文件，在 WhatsApp 或邮件里发送。",
+        links: [{ href: "files/Beibo_Product_Catalog_2026.pdf", label: "Download catalog (PDF, 11 MB)" }] },
+      { q: "Product pictures", q_zh: "产品图片",
+        keys: "image picture photo render diagram 图片 照片 渲染图",
+        info: "Tap a picture to open it full size, then save it or send it.",
+        info_zh: "点击图片查看大图，可保存或发送。",
+        img: [{ src: "img/monitoring-system.jpg", cap: "Monitoring system" }, { src: "img/fumigation-system.jpg", cap: "Recirculation fumigation" }, { src: "img/controller.jpg", cap: "Controller" }, { src: "img/temperature-cable.jpg", cap: "Temperature cable" }, { src: "img/solar-wireless-controller.jpg", cap: "Solar wireless controller" }] }
     ]},
 
     { id: "notes", title: "Call notes", zh: "沟通记录", items: [

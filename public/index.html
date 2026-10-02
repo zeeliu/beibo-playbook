@@ -112,6 +112,14 @@ h3.topic .zh{text-transform:none;letter-spacing:0;margin-left:6px;font-weight:40
 .info p{margin:0 0 6px}.info p:last-child{margin:0}
 .info ul{margin:2px 0 6px;padding-left:20px}.info li{margin:3px 0}
 .info .zhblock{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--ink-2)}
+.gallery{display:flex;gap:10px;overflow-x:auto;padding-bottom:2px}
+.gallery a{flex:none;width:200px;text-decoration:none;color:var(--ink-2)}
+.gallery.one a{width:min(100%,520px)}
+.gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:10px}
+.gallery span{display:block;font-size:12px;margin-top:4px;line-height:1.35}
+.dl{display:flex;gap:8px;flex-wrap:wrap}
+.dl a{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);color:var(--accent);border-radius:9px;padding:6px 12px;text-decoration:none;font-size:14px;font-weight:600}
+.dl a:hover{background:var(--accent-soft)}
 pre.copy{margin:0;white-space:pre-wrap;font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--hover);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .btn{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:3px 10px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
 .btn:hover{border-color:var(--ink-3);color:var(--ink)}
@@ -340,6 +348,14 @@ footer{color:var(--ink-3);font-size:12.5px;text-align:center;padding:30px 20px 4
       d.insertAdjacentHTML("beforeend", '<div class="info">' +
         (it.info ? '<div class="' + (it.info_zh ? "en-only" : "") + '">' + fmt(it.info) + '</div>' : '') +
         (it.info_zh ? '<div class="zhblock zh-only">' + fmt(it.info_zh) + '</div>' : '') + '</div>');
+    }
+    if(it.img && it.img.length){
+      d.insertAdjacentHTML("beforeend", '<div class="gallery' + (it.img.length === 1 ? ' one' : '') + '">' +
+        it.img.map(m => '<a href="' + esc(m.src) + '" target="_blank" rel="noopener"><img src="' + esc(m.src) + '" alt="' + esc(m.cap) + '" loading="lazy"><span>' + esc(m.cap) + '</span></a>').join("") + '</div>');
+    }
+    if(it.links && it.links.length){
+      d.insertAdjacentHTML("beforeend", '<div class="dl">' +
+        it.links.map(l => '<a href="' + esc(l.href) + '" target="_blank" rel="noopener" download>⬇ ' + esc(l.label) + '</a>').join("") + '</div>');
     }
     if(it.copy){
       const wrap = document.createElement("div");

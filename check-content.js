@@ -35,6 +35,8 @@ else {
         if (!it.q) problems.push(`${label}: missing "q"`);
         if (it.light && !["g", "y", "r"].includes(it.light)) problems.push(`${label}: light must be "g", "y" or "r"`);
         if (!(it.say || it.say_zh || it.tip || it.info || it.info_zh || it.copy)) problems.push(`${label}: needs say, tip, info or copy`);
+        (it.img || []).forEach(m => { if (!m.src || !fs.existsSync(path.join(__dirname, "public", m.src))) problems.push(`${label}: image not found: public/${m.src}`); });
+        (it.links || []).forEach(l => { if (!/^https?:/.test(l.href || "") && !fs.existsSync(path.join(__dirname, "public", l.href || ""))) problems.push(`${label}: file not found: public/${l.href}`); });
         ["en", "zh", "note", "qz"].forEach(k => { if (k in it) problems.push(`${label}: unknown field "${k}" (did you mean say / say_zh / tip / q_zh?)`); });
       });
     });
